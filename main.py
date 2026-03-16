@@ -1,147 +1,153 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="MBTI 진로 탐색 + 나루토 캐릭터",
-    page_icon="📚",
+    page_title="MBTI × 나루토 캐릭터 추천",
+    page_icon="🍥",
     layout="centered"
 )
 
-st.title("📚 MBTI 진로 탐색 & 나루토 캐릭터")
-st.subheader("✨ 성격을 이해하고 나와 닮은 캐릭터와 진로를 찾아보세요")
-
-st.write(
-"""
-이 앱에서는  
-✔ MBTI 성격  
-✔ 강점  
-✔ 추천 진로  
-✔ 추천 도서  
-✔ 나루토 캐릭터  
-
-를 함께 탐색할 수 있습니다 🍥
-"""
-)
+st.title("🍥 MBTI로 보는 나루토 캐릭터 & 만화 추천")
+st.write("나의 MBTI와 비슷한 나루토 캐릭터와 추천 만화를 알아보세요!")
 
 st.markdown("---")
 
-data = {
+mbti_data = {
 
 "INTJ":{
-"trait":"전략적이고 미래지향적인 분석가",
-"strength":["전략적 사고","문제 해결","독립적 학습"],
-"career":["연구원","과학자","데이터 분석가"],
-"books":["10대를 위한 미래 직업 이야기","과학자의 길","생각의 힘"],
 "character":"우치하 이타치",
-"image":"https://static.wikia.nocookie.net/naruto/images/7/7c/Itachi.png",
-"reason":"이타치는 뛰어난 전략가이며 깊은 사고와 장기적인 계획을 세우는 인물입니다. 이는 INTJ의 전략적 사고와 매우 유사합니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/4/4c/Itachi_Uchiha.png",
+"reason":"이타치는 전략적이고 깊이 있는 사고를 하는 인물입니다. 장기적인 계획과 냉철한 판단은 INTJ의 특징과 닮아 있습니다.",
+"manga":["데스노트","닥터 스톤","플라네테스"]
 },
 
 "INTP":{
-"trait":"논리와 탐구를 좋아하는 사색가",
-"strength":["논리적 사고","호기심","분석력"],
-"career":["연구원","프로그래머","철학자"],
-"books":["과학 탐구 이야기","생각하는 힘","발명가 이야기"],
 "character":"나라 시카마루",
-"image":"https://static.wikia.nocookie.net/naruto/images/4/4b/Shikamaru.png",
-"reason":"시카마루는 게으른 것처럼 보이지만 매우 뛰어난 전략과 논리를 가진 캐릭터로 INTP의 분석적 사고와 닮았습니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/5/5a/Shikamaru_Nara.png",
+"reason":"시카마루는 문제를 논리적으로 분석하고 최소한의 노력으로 최고의 전략을 찾는 캐릭터입니다.",
+"manga":["닥터 스톤","스파이 패밀리","강철의 연금술사"]
 },
 
 "ENTJ":{
-"trait":"목표지향적 리더",
-"strength":["리더십","전략","결단력"],
-"career":["CEO","경영자","정책 전문가"],
-"books":["리더십 수업","세상을 움직이는 리더","경영 이야기"],
 "character":"우치하 마다라",
-"image":"https://static.wikia.nocookie.net/naruto/images/5/5a/Madara.png",
-"reason":"마다라는 강력한 카리스마와 리더십을 가진 인물로 큰 목표를 향해 조직을 이끄는 ENTJ의 특징과 닮았습니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/7/76/Madara_Uchiha.png",
+"reason":"강한 리더십과 목표 중심 사고를 가진 마다라는 ENTJ의 카리스마 있는 지도자와 비슷합니다.",
+"manga":["킹덤","진격의 거인","코드기어스"]
 },
 
 "ENTP":{
-"trait":"창의적인 아이디어 메이커",
-"strength":["창의력","도전","토론 능력"],
-"career":["창업가","기획자","마케터"],
-"books":["아이디어 혁명","창업가의 생각","미래 직업 탐험"],
 "character":"지라이야",
-"image":"https://static.wikia.nocookie.net/naruto/images/7/70/Jiraiya.png",
-"reason":"지라이야는 자유롭고 창의적이며 새로운 시도를 즐기는 인물로 ENTP의 아이디어 중심 성향과 비슷합니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/3/3e/Jiraiya.png",
+"reason":"자유로운 사고와 창의적인 아이디어를 가진 지라이야는 ENTP의 혁신가적 성향을 보여줍니다.",
+"manga":["원피스","닥터 스톤","스파이 패밀리"]
 },
 
 "INFJ":{
-"trait":"사람의 성장과 의미를 중요하게 생각하는 이상주의자",
-"strength":["공감","통찰력","가치 중심 사고"],
-"career":["상담가","심리학자","작가"],
-"books":["마음을 이해하는 심리학","세상을 바꾸는 작은 행동","상담 이야기"],
 "character":"나가토 (페인)",
-"image":"https://static.wikia.nocookie.net/naruto/images/9/9c/Pain.png",
-"reason":"나가토는 세상의 고통을 이해하고 평화를 고민하는 인물로 깊은 이상과 철학을 가진 INFJ와 닮았습니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/7/7e/Pain_%28Naruto%29.png",
+"reason":"세상의 평화와 의미를 깊이 고민하는 나가토는 이상주의적 INFJ와 비슷합니다.",
+"manga":["진격의 거인","바람계곡의 나우시카","약속의 네버랜드"]
 },
 
 "INFP":{
-"trait":"이상과 가치를 중요하게 여기는 중재자",
-"strength":["창의성","공감","자기성찰"],
-"career":["작가","예술가","상담가"],
-"books":["나의 꿈 찾기","예술가의 삶","자기 발견"],
 "character":"우즈마키 나루토",
-"image":"https://static.wikia.nocookie.net/naruto/images/9/94/Naruto.png",
-"reason":"나루토는 자신의 신념과 꿈을 끝까지 지키는 인물로 이상과 가치 중심의 INFP와 잘 맞습니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/9/94/Naruto_Uzumaki.png",
+"reason":"자신의 신념과 꿈을 끝까지 지키는 나루토는 이상을 중요하게 여기는 INFP의 모습과 닮았습니다.",
+"manga":["나루토","원피스","마이 히어로 아카데미아"]
 },
 
 "ENFJ":{
-"trait":"사람의 성장을 돕는 리더",
-"strength":["공감","리더십","소통"],
-"career":["교사","코치","교육자"],
-"books":["멘토의 역할","사람을 성장시키는 리더","교육 이야기"],
 "character":"나미카제 미나토",
-"image":"https://static.wikia.nocookie.net/naruto/images/5/5d/Minato.png",
-"reason":"미나토는 주변 사람들을 성장시키고 보호하는 리더로 ENFJ의 따뜻한 지도자 모습과 닮았습니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/7/7e/Minato_Namikaze.png",
+"reason":"사람들을 보호하고 이끄는 따뜻한 리더 미나토는 ENFJ의 지도자적 성향과 비슷합니다.",
+"manga":["마이 히어로 아카데미아","하이큐","귀멸의 칼날"]
 },
 
 "ENFP":{
-"trait":"열정적이고 가능성을 발견하는 활동가",
-"strength":["열정","창의력","사람과의 소통"],
-"career":["기획자","방송인","작가"],
-"books":["열정으로 도전하기","직업 여행","꿈 찾기"],
 "character":"록 리",
-"image":"https://static.wikia.nocookie.net/naruto/images/8/8d/Rock_Lee.png",
-"reason":"록리는 긍정적이고 열정적인 성격으로 주변 사람들에게 에너지를 주는 ENFP와 매우 비슷합니다."
+"image":"https://upload.wikimedia.org/wikipedia/en/5/5a/Rock_Lee.png",
+"reason":"긍정적이고 열정적인 록 리는 주변 사람들에게 에너지를 주는 ENFP와 닮았습니다.",
+"manga":["원피스","하이큐","나루토"]
+},
+
+"ISTJ":{
+"character":"하타케 카카시",
+"image":"https://upload.wikimedia.org/wikipedia/en/2/27/Kakashi_Hatake.png",
+"reason":"책임감 있고 규칙을 중요하게 생각하는 카카시는 ISTJ의 현실적이고 성실한 모습과 비슷합니다.",
+"manga":["블리치","진격의 거인","주술회전"]
+},
+
+"ISFJ":{
+"character":"휴가 히나타",
+"image":"https://upload.wikimedia.org/wikipedia/en/9/97/Hinata_Hyuga.png",
+"reason":"따뜻하고 배려심 많은 히나타는 ISFJ의 보호자 성향과 닮아 있습니다.",
+"manga":["후르츠 바스켓","너에게 닿기를","하이큐"]
+},
+
+"ESTJ":{
+"character":"센쥬 토비라마",
+"image":"https://upload.wikimedia.org/wikipedia/en/0/0c/Tobirama_Senju.png",
+"reason":"조직과 규칙을 중요하게 생각하는 토비라마는 ESTJ의 관리자 성향과 비슷합니다.",
+"manga":["킹덤","도쿄 리벤저스","블리치"]
+},
+
+"ESFJ":{
+"character":"노하라 린",
+"image":"https://upload.wikimedia.org/wikipedia/en/0/02/Rin_Nohara.png",
+"reason":"친절하고 협력적인 린은 사람을 돕는 ESFJ의 따뜻한 성격과 닮았습니다.",
+"manga":["하이큐","너에게 닿기를","마이 히어로 아카데미아"]
+},
+
+"ISTP":{
+"character":"우치하 사스케",
+"image":"https://upload.wikimedia.org/wikipedia/en/4/4e/Sasuke_Uchiha.png",
+"reason":"독립적이고 문제 해결 능력이 뛰어난 사스케는 ISTP의 실용적인 성향과 닮았습니다.",
+"manga":["도쿄 구울","주술회전","블리치"]
+},
+
+"ISFP":{
+"character":"데이다라",
+"image":"https://upload.wikimedia.org/wikipedia/en/2/2d/Deidara.png",
+"reason":"예술과 감각을 중요하게 생각하는 데이다라는 ISFP의 예술가 기질과 비슷합니다.",
+"manga":["블루 피리어드","베르세르크","나나"]
+},
+
+"ESTP":{
+"character":"킬러 비",
+"image":"https://upload.wikimedia.org/wikipedia/en/e/e1/Killer_Bee.png",
+"reason":"활동적이고 자신감 넘치는 킬러비는 ESTP의 모험가 성향과 닮았습니다.",
+"manga":["원펀맨","도쿄 리벤저스","주술회전"]
+},
+
+"ESFP":{
+"character":"우즈마키 쿠시나",
+"image":"https://upload.wikimedia.org/wikipedia/en/0/05/Kushina_Uzumaki.png",
+"reason":"밝고 에너지 넘치는 쿠시나는 사람들과 즐거움을 나누는 ESFP의 성격과 비슷합니다.",
+"manga":["원피스","하이큐","나루토"]
 }
 
 }
 
-mbti = st.selectbox("🧠 MBTI 유형 선택", list(data.keys()))
+mbti = st.selectbox("🧠 MBTI 유형 선택", list(mbti_data.keys()))
 
-if st.button("🚀 나의 진로 탐색"):
+if st.button("🍥 나와 닮은 캐릭터 보기"):
 
     st.balloons()
 
-    info = data[mbti]
+    info = mbti_data[mbti]
 
-    st.markdown("## 🌟 성격 특징")
-    st.info(info["trait"])
+    st.markdown(f"## 🍥 {info['character']}")
 
-    st.markdown("## 💪 강점")
-    for s in info["strength"]:
-        st.write("✔", s)
+    st.image(info["image"], width=250)
 
-    st.markdown("## 🎯 추천 진로")
-    for c in info["career"]:
-        st.write("🚀", c)
-
-    st.markdown("## 📚 추천 도서")
-    for b in info["books"]:
-        st.write("📖", b)
-
-    st.markdown("---")
-
-    st.markdown(f"## 🍥 추천 나루토 캐릭터 : {info['character']}")
-
-    st.image(info["image"], width=300)
-
-    st.markdown("### ⭐ 추천 이유")
+    st.markdown("### ⭐ 왜 추천했을까요?")
     st.write(info["reason"])
 
-    st.markdown("---")
+    st.markdown("### 📚 추천 만화")
 
-    st.success("✨ 진로는 정답이 아니라 탐험입니다. 다양한 경험을 해보세요!")
+    for m in info["manga"]:
+        st.write("📖", m)
 
-st.caption("🎓 MBTI 기반 청소년 진로 탐색 앱")
+    st.success("✨ 만화를 통해 다양한 성격과 이야기를 탐험해보세요!")
+
+st.markdown("---")
+st.caption("MBTI × 나루토 캐릭터 추천 앱")
