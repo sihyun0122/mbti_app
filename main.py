@@ -1,241 +1,147 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="MBTI 진로 탐색 도서 추천",
+    page_title="MBTI 진로 탐색 + 나루토 캐릭터",
     page_icon="📚",
     layout="centered"
 )
 
-st.title("📚 MBTI 기반 청소년 진로 탐색")
-st.subheader("✨ 나의 성격을 이해하고 미래 직업을 탐색해보세요")
+st.title("📚 MBTI 진로 탐색 & 나루토 캐릭터")
+st.subheader("✨ 성격을 이해하고 나와 닮은 캐릭터와 진로를 찾아보세요")
 
 st.write(
 """
-이 앱은 MBTI 성격 유형을 기반으로  
-✔ 성격 특징  
+이 앱에서는  
+✔ MBTI 성격  
 ✔ 강점  
-✔ 추천 진로 분야  
-✔ 추천 직업  
-✔ 청소년 진로 도서  
+✔ 추천 진로  
+✔ 추천 도서  
+✔ 나루토 캐릭터  
 
-를 안내합니다.
+를 함께 탐색할 수 있습니다 🍥
 """
 )
 
 st.markdown("---")
 
-mbti_data = {
+data = {
 
 "INTJ":{
-"trait":"전략적이고 미래지향적인 사고를 하는 분석가형",
-"strength":["문제 해결 능력","전략적 사고","독립적인 학습"],
-"career":["연구원","데이터 과학자","엔지니어","교수"],
-"books":[
-"10대를 위한 미래 직업 이야기",
-"청소년을 위한 과학자의 길",
-"세상을 바꾸는 아이디어"
-]
+"trait":"전략적이고 미래지향적인 분석가",
+"strength":["전략적 사고","문제 해결","독립적 학습"],
+"career":["연구원","과학자","데이터 분석가"],
+"books":["10대를 위한 미래 직업 이야기","과학자의 길","생각의 힘"],
+"character":"우치하 이타치",
+"image":"https://static.wikia.nocookie.net/naruto/images/7/7c/Itachi.png",
+"reason":"이타치는 뛰어난 전략가이며 깊은 사고와 장기적인 계획을 세우는 인물입니다. 이는 INTJ의 전략적 사고와 매우 유사합니다."
 },
 
 "INTP":{
-"trait":"논리와 탐구를 좋아하는 지적 탐험가",
-"strength":["논리적 사고","창의적 문제 해결","깊은 호기심"],
-"career":["과학자","프로그래머","연구원","철학자"],
-"books":[
-"청소년을 위한 과학 탐구",
-"생각하는 힘을 키우는 질문",
-"미래를 만드는 발명가"
-]
+"trait":"논리와 탐구를 좋아하는 사색가",
+"strength":["논리적 사고","호기심","분석력"],
+"career":["연구원","프로그래머","철학자"],
+"books":["과학 탐구 이야기","생각하는 힘","발명가 이야기"],
+"character":"나라 시카마루",
+"image":"https://static.wikia.nocookie.net/naruto/images/4/4b/Shikamaru.png",
+"reason":"시카마루는 게으른 것처럼 보이지만 매우 뛰어난 전략과 논리를 가진 캐릭터로 INTP의 분석적 사고와 닮았습니다."
 },
 
 "ENTJ":{
-"trait":"목표 지향적이고 리더십이 강한 전략가",
-"strength":["리더십","조직관리","목표 설정"],
-"career":["CEO","경영자","프로젝트 매니저","정책 전문가"],
-"books":[
-"10대를 위한 리더십 수업",
-"세상을 움직이는 리더",
-"미래 사회와 리더의 역할"
-]
+"trait":"목표지향적 리더",
+"strength":["리더십","전략","결단력"],
+"career":["CEO","경영자","정책 전문가"],
+"books":["리더십 수업","세상을 움직이는 리더","경영 이야기"],
+"character":"우치하 마다라",
+"image":"https://static.wikia.nocookie.net/naruto/images/5/5a/Madara.png",
+"reason":"마다라는 강력한 카리스마와 리더십을 가진 인물로 큰 목표를 향해 조직을 이끄는 ENTJ의 특징과 닮았습니다."
 },
 
 "ENTP":{
-"trait":"아이디어가 넘치고 토론을 좋아하는 혁신가",
-"strength":["창의력","문제 해결","새로운 시도"],
-"career":["창업가","기획자","마케팅 전문가","발명가"],
-"books":[
-"아이디어로 세상을 바꾸다",
-"창업가의 생각법",
-"미래 직업 탐험"
-]
+"trait":"창의적인 아이디어 메이커",
+"strength":["창의력","도전","토론 능력"],
+"career":["창업가","기획자","마케터"],
+"books":["아이디어 혁명","창업가의 생각","미래 직업 탐험"],
+"character":"지라이야",
+"image":"https://static.wikia.nocookie.net/naruto/images/7/70/Jiraiya.png",
+"reason":"지라이야는 자유롭고 창의적이며 새로운 시도를 즐기는 인물로 ENTP의 아이디어 중심 성향과 비슷합니다."
 },
 
 "INFJ":{
 "trait":"사람의 성장과 의미를 중요하게 생각하는 이상주의자",
-"strength":["공감 능력","통찰력","가치 중심 사고"],
-"career":["상담가","심리학자","작가","교육자"],
-"books":[
-"마음을 이해하는 심리학",
-"세상을 바꾸는 작은 행동",
-"청소년을 위한 상담 이야기"
-]
+"strength":["공감","통찰력","가치 중심 사고"],
+"career":["상담가","심리학자","작가"],
+"books":["마음을 이해하는 심리학","세상을 바꾸는 작은 행동","상담 이야기"],
+"character":"나가토 (페인)",
+"image":"https://static.wikia.nocookie.net/naruto/images/9/9c/Pain.png",
+"reason":"나가토는 세상의 고통을 이해하고 평화를 고민하는 인물로 깊은 이상과 철학을 가진 INFJ와 닮았습니다."
 },
 
 "INFP":{
-"trait":"자신의 가치와 꿈을 중요하게 여기는 이상주의자",
-"strength":["창의성","공감 능력","자기 성찰"],
-"career":["작가","예술가","디자이너","상담가"],
-"books":[
-"나의 꿈 찾기 프로젝트",
-"세상에 하나뿐인 나",
-"예술가의 삶"
-]
+"trait":"이상과 가치를 중요하게 여기는 중재자",
+"strength":["창의성","공감","자기성찰"],
+"career":["작가","예술가","상담가"],
+"books":["나의 꿈 찾기","예술가의 삶","자기 발견"],
+"character":"우즈마키 나루토",
+"image":"https://static.wikia.nocookie.net/naruto/images/9/94/Naruto.png",
+"reason":"나루토는 자신의 신념과 꿈을 끝까지 지키는 인물로 이상과 가치 중심의 INFP와 잘 맞습니다."
 },
 
 "ENFJ":{
-"trait":"사람의 성장을 돕는 따뜻한 리더",
-"strength":["리더십","공감","소통"],
-"career":["교사","코치","강연가","교육 기획자"],
-"books":[
-"사람을 성장시키는 리더",
-"교육자의 길",
-"청소년 멘토 이야기"
-]
+"trait":"사람의 성장을 돕는 리더",
+"strength":["공감","리더십","소통"],
+"career":["교사","코치","교육자"],
+"books":["멘토의 역할","사람을 성장시키는 리더","교육 이야기"],
+"character":"나미카제 미나토",
+"image":"https://static.wikia.nocookie.net/naruto/images/5/5d/Minato.png",
+"reason":"미나토는 주변 사람들을 성장시키고 보호하는 리더로 ENFJ의 따뜻한 지도자 모습과 닮았습니다."
 },
 
 "ENFP":{
-"trait":"열정적이고 가능성을 발견하는 탐험가",
+"trait":"열정적이고 가능성을 발견하는 활동가",
 "strength":["열정","창의력","사람과의 소통"],
-"career":["기획자","마케터","작가","방송인"],
-"books":[
-"세상 속 직업 여행",
-"나만의 꿈 찾기",
-"열정으로 도전하기"
-]
-},
-
-"ISTJ":{
-"trait":"책임감 있고 체계적인 관리자",
-"strength":["성실함","계획력","책임감"],
-"career":["공무원","회계사","관리자","군인"],
-"books":[
-"성실함이 만드는 성공",
-"전문가의 길",
-"청소년 직업 탐구"
-]
-},
-
-"ISFJ":{
-"trait":"배려심이 깊고 책임감 있는 보호자",
-"strength":["헌신","배려","신뢰성"],
-"career":["간호사","교사","사회복지사"],
-"books":[
-"사람을 돕는 직업",
-"따뜻한 직업 이야기",
-"청소년 사회복지 이야기"
-]
-},
-
-"ESTJ":{
-"trait":"조직을 잘 이끄는 현실적인 관리자",
-"strength":["조직관리","실행력","책임감"],
-"career":["경영자","행정가","군 장교"],
-"books":[
-"조직을 움직이는 힘",
-"리더의 책임",
-"경영 이야기"
-]
-},
-
-"ESFJ":{
-"trait":"사람들과 협력하는 따뜻한 리더",
-"strength":["협력","소통","친절"],
-"career":["교사","간호사","이벤트 기획자"],
-"books":[
-"함께 일하는 직업",
-"협력의 힘",
-"사람 중심 직업"
-]
-},
-
-"ISTP":{
-"trait":"문제를 직접 해결하는 실용적인 탐험가",
-"strength":["실용성","기술","분석력"],
-"career":["엔지니어","정비사","파일럿"],
-"books":[
-"기술자의 길",
-"청소년 공학 이야기",
-"손으로 배우는 미래 기술"
-]
-},
-
-"ISFP":{
-"trait":"감각적이고 예술적인 창작자",
-"strength":["예술성","감성","자유로운 사고"],
-"career":["디자이너","예술가","사진작가"],
-"books":[
-"예술가의 삶",
-"창작의 즐거움",
-"디자인 이야기"
-]
-},
-
-"ESTP":{
-"trait":"도전과 모험을 즐기는 활동가",
-"strength":["행동력","문제 해결","도전 정신"],
-"career":["기업가","운동선수","세일즈 전문가"],
-"books":[
-"도전하는 삶",
-"기업가 정신",
-"청소년 리더 이야기"
-]
-},
-
-"ESFP":{
-"trait":"사람들과 즐거움을 나누는 엔터테이너",
-"strength":["사교성","긍정성","표현력"],
-"career":["배우","방송인","이벤트 기획자"],
-"books":[
-"무대 위의 직업",
-"세상을 즐겁게 만드는 사람들",
-"엔터테인먼트 산업"
-]
+"career":["기획자","방송인","작가"],
+"books":["열정으로 도전하기","직업 여행","꿈 찾기"],
+"character":"록 리",
+"image":"https://static.wikia.nocookie.net/naruto/images/8/8d/Rock_Lee.png",
+"reason":"록리는 긍정적이고 열정적인 성격으로 주변 사람들에게 에너지를 주는 ENFP와 매우 비슷합니다."
 }
 
 }
 
-mbti = st.selectbox("🧠 MBTI 유형을 선택하세요", list(mbti_data.keys()))
+mbti = st.selectbox("🧠 MBTI 유형 선택", list(data.keys()))
 
-if st.button("🚀 진로 탐색 시작하기"):
+if st.button("🚀 나의 진로 탐색"):
 
     st.balloons()
 
-    data = mbti_data[mbti]
+    info = data[mbti]
 
-    st.markdown("## 🌟 MBTI 성격 특징")
-    st.info(data["trait"])
+    st.markdown("## 🌟 성격 특징")
+    st.info(info["trait"])
 
-    st.markdown("## 💪 나의 강점")
-    for s in data["strength"]:
+    st.markdown("## 💪 강점")
+    for s in info["strength"]:
         st.write("✔", s)
 
-    st.markdown("## 🎯 추천 진로 분야")
-    for c in data["career"]:
+    st.markdown("## 🎯 추천 진로")
+    for c in info["career"]:
         st.write("🚀", c)
 
-    st.markdown("## 📚 추천 진로 도서")
-    for b in data["books"]:
+    st.markdown("## 📚 추천 도서")
+    for b in info["books"]:
         st.write("📖", b)
 
     st.markdown("---")
 
-    st.markdown("## 🤔 스스로에게 질문해보세요")
+    st.markdown(f"## 🍥 추천 나루토 캐릭터 : {info['character']}")
 
-    st.write("• 내가 가장 즐겁게 몰입하는 활동은 무엇일까?")
-    st.write("• 어떤 문제를 해결할 때 보람을 느끼는가?")
-    st.write("• 내가 세상에 기여하고 싶은 방식은 무엇일까?")
+    st.image(info["image"], width=300)
+
+    st.markdown("### ⭐ 추천 이유")
+    st.write(info["reason"])
+
+    st.markdown("---")
 
     st.success("✨ 진로는 정답이 아니라 탐험입니다. 다양한 경험을 해보세요!")
 
-st.markdown("---")
-st.caption("🎓 MBTI 기반 청소년 진로 탐색 교육용 앱")
+st.caption("🎓 MBTI 기반 청소년 진로 탐색 앱")
